@@ -1,0 +1,24 @@
+{
+    "items": [ 
+        {
+            "item_code": "02120008",
+            "item_id": "155627720967769687479",
+            "qty": "1",
+            "unit": "PCS",
+            "price": "335500.0000",
+            "tax": "",
+            "discount": "40.0%"
+        }
+    ],
+    "trans_no": "SIM-MDN/2111/2001212",
+    "trans_type": "SI",
+    "location": "MDC",
+    "date": "2022-11-20",
+    "customer_id": "152144115875701131294",
+    "create_by": "trial",
+    "remark": "remark",
+    "payment_type": "143166594332601303864",
+    "payment_term": "151315269033500462002",
+    "payment_amount": 100000,
+    "payment_change": 5000
+}

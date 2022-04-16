@@ -10,8 +10,8 @@ router = DefaultRouter()
 # else:
 # router = SimpleRouter()
 
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+# router.register(r'users', views.UserViewSet)
+# router.register(r'groups', views.GroupViewSet)
 router.register(r'transaction', TransactionViewset)
 
 urlpatterns = [
