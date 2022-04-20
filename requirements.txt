@@ -12,3 +12,6 @@ requests==2.27.1
 sqlparse==0.4.2
 urllib3==1.26.9
 zipp==3.7.0
+PyMySQL==0.10.1
+python-slugify==4.0.1
+text-unidecode==1.3
