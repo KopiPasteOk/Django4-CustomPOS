@@ -22,25 +22,25 @@ class Transaction(models.Model):
         return f"{self.trans_no}"
    
    
-class TransactionItem(models.Model):
-    class Meta:
-        verbose_name = 'Item'
-        verbose_name_plural = 'Items'
+# class TransactionItem(models.Model):
+#     class Meta:
+#         verbose_name = 'Item'
+#         verbose_name_plural = 'Items'
 
-    transaction = models.ForeignKey(
-        'transaction.Transaction', 
-        on_delete=models.CASCADE, 
-        related_name="items",
-        null=True
-    )
-    item_code = models.CharField(max_length=100)
-    item_id = models.CharField(max_length=100, blank=True, null=True)
-    qty = models.CharField(max_length=100, blank=True, null=True)
-    unit = models.CharField(max_length=100, blank=True, null=True)
-    price = models.CharField(max_length=100, blank=True, null=True)
-    tax = models.CharField(max_length=100, blank=True, null=True)
-    disc = models.CharField(max_length=100, blank=True, null=True)
+#     transaction = models.ForeignKey(
+#         'transaction.Transaction', 
+#         on_delete=models.CASCADE, 
+#         related_name="items",
+#         null=True
+#     )
+#     item_code = models.CharField(max_length=100)
+#     item_id = models.CharField(max_length=100, blank=True, null=True)
+#     qty = models.CharField(max_length=100, blank=True, null=True)
+#     unit = models.CharField(max_length=100, blank=True, null=True)
+#     price = models.CharField(max_length=100, blank=True, null=True)
+#     tax = models.CharField(max_length=100, blank=True, null=True)
+#     disc = models.CharField(max_length=100, blank=True, null=True)
     
     
-    def __str__(self):
-        return f'{self.transaction.id} - {self.item_code}' 
+#     def __str__(self):
+#         return f'{self.transaction.id} - {self.item_code}' 
