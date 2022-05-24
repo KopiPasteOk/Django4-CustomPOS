@@ -20,7 +20,7 @@ class TransactionViewset(ModelViewSet):
     serializer_class = TransactionSerializer
     queryset = Transaction.objects.none()
     filterset_fields = ["library_id"]
-    save_url = "http://vipcloud.erp.web.id:8082/teratai-demo/weblayer/template/api,CreateSI.vm?"
+    save_url = "https://asiacloud.erp.web.id/teratai-demo/weblayer/template/api,CreateSI.vm?"
 
     def get_queryset(self, *args, **kwargs):
         return Transaction.objects.all()
@@ -51,7 +51,7 @@ class TransactionViewset(ModelViewSet):
                 "docs": json.dumps(jsondata)
             }
 
-            request = requests.post(self.save_url, payload)
+            request = requests.post(self.save_url, payload, verify=False)
             print(request)
             print(request.json())
             response = request.json()
