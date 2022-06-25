@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     "customPOS.apps.transaction",
-    # "customPOS.apps.settings",
+    "customPOS.apps.settings",
 ]
 
 MIDDLEWARE = [

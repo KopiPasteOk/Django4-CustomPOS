@@ -14,14 +14,17 @@ from customPOS.apps.transaction.api.serializers import (
     TransactionSerializer
 )
 from customPOS.apps.transaction.models import (Transaction, TransactionItem)
+from customPOS.apps.settings.models import (Settings)
 
 
 class TransactionViewset(ModelViewSet):
     serializer_class = TransactionSerializer
     queryset = Transaction.objects.none()
     filterset_fields = ["library_id"]
-    save_url = "https://asiacloud.erp.web.id/teratai-demo/weblayer/template/api,CreateSI.vm?"
-
+    sett = Settings.objects.filter(name='url_save').first()
+    default_url = "https://asiacloud.erp.web.id/teratai-demo/weblayer/template/api,CreateSI.vm?"
+    save_url = sett.text_value if sett else default_url
+    
     def get_queryset(self, *args, **kwargs):
         return Transaction.objects.all()
 
@@ -52,10 +55,7 @@ class TransactionViewset(ModelViewSet):
             }
 
             request = requests.post(self.save_url, payload, verify=False)
-            print(request)
-            print(request.json())
             response = request.json()
-            print(response["error"])
             if response["error"] == 0:
                 serializer.save()
                 return Response(serializer.data)
