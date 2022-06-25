@@ -21,17 +21,16 @@ class TransactionViewset(ModelViewSet):
     serializer_class = TransactionSerializer
     queryset = Transaction.objects.none()
     filterset_fields = ["library_id"]
-    sett = Settings.objects.filter(name='url_save').first()
-    print(sett.text_value)
-    default_url = "https://asiacloud.erp.web.id/teratai-demo/weblayer/template/api,CreateSI.vm?"
-    save_url = sett.text_value if sett else default_url
-    print(save_url)
     
     def get_queryset(self, *args, **kwargs):
         return Transaction.objects.all()
 
     @action(["POST"], detail=False)
     def custom_create(self, request):
+        sett = Settings.objects.filter(name='url_save').first()
+        default_url = "https://asiacloud.erp.web.id/teratai-demo/weblayer/template/api,CreateSI.vm?"
+        save_url = sett.text_value
+        
         serializer = TransactionSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             post_data = request.data
@@ -56,7 +55,7 @@ class TransactionViewset(ModelViewSet):
                 "docs": json.dumps(jsondata)
             }
 
-            request = requests.post(self.save_url, payload, verify=False)
+            request = requests.post(save_url, payload, verify=False)
             response = request.json()
             if response["error"] == 0:
                 serializer.save()
