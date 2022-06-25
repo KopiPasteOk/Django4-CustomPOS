@@ -30,10 +30,22 @@ class TransactionViewset(ModelViewSet):
         sett = Settings.objects.filter(name='url_save').first()
         default_url = "https://asiacloud.erp.web.id/teratai-demo/weblayer/template/api,CreateSI.vm?"
         save_url = sett.text_value
+        post_data = request.data
+        payment_amount = post_data["payment_amount"]
+        payment_change = post_data["payment_change"]
+        items = post_data["items"]
+        total = 0
+        for item in items: 
+            price = item["price"].replace(".","").replace(",","")
+            qty = item["qty"].replace(".","").replace(",","")
+            total_price = int(price) * int(qty)
+            total += total_price
+        
+        if not total ==  payment_amount:
+            return Response(status=HTTP_400_BAD_REQUEST, data={"error": "Not valid payment amount"})
         
         serializer = TransactionSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            post_data = request.data
             date = post_data["date"]
             date = f"{date[8:10]}/{date[5:7]}/{date[0:4]}"
             jsondata = {
@@ -59,6 +71,6 @@ class TransactionViewset(ModelViewSet):
             response = request.json()
             if response["error"] == 0:
                 serializer.save()
-                return Response(serializer.data)
+                return Response({"message": "transaction saved succesfully"})
             else:
                 return Response(status=HTTP_400_BAD_REQUEST, data=response["message"])
